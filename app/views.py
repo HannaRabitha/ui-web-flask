@@ -4,11 +4,20 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 # Flask modules
-from flask   import render_template
-from jinja2  import TemplateNotFound
-
-# App modules
 from app import app
+from app import server as ml
+from flask import render_template, json, request, jsonify
+from jinja2  import TemplateNotFound
+from pandas.tseries.offsets import DateOffset
+import pandas as pd
+import numpy as np
+from pandas import DataFrame
+from werkzeug.utils import secure_filename
+import os
+import csv
+import math
+
+
 
 # App main route + generic routing
 @app.route('/', defaults={'path': 'index.html'})
@@ -25,11 +34,32 @@ def index(path):
 
 
 
-@app.route('/testing.html')
+@app.route('/testing.html', methods=['GET', 'POST'])
 def testing():
-    isi_berita = 'Jakarta - Korps Adhyaksa digegerkan dengan database atau basis data mereka diretas dan hendak dijual Usut punya usut, peretas database Kejaksaan Agung (Kejagung) itu seorang anak baru gede (ABG) berumur 16 tahun di Lahat, Sumatera Selatan (Sumsel).Kejagung berkoordinasi Badan Siber dan Sandi Negara (BSSN) untuk membongkar sosok peretas database mereka. Kejagung memperoleh informasi dugaan peretasan dan penjualan database mereka di situs raidforums.com."Dari penelusuran yang didapatkan identitas pelaku berinisial adalah M atau panjangannya ada MFW," kata Kapuspenkum Kejagung, Leonard Eben Ezer Simanjuntak, dalam konferensi pers di Kejagung, Jl Sultan Hasanuddin, Jakarta Selatan, Jumat (19/2/2021).'
-    klasifikasi= 'peretasan'
-    return render_template('testing.html', isi_berita=isi_berita, klasifikasi=klasifikasi)
 
+    if request.method == "POST":
+        data = []
+        
+        link = request.form["link"]
+        source = 'detik'
 
+        with open('C:/users/asus/desktop/Model','rb') as f:
+            mp = ml.pickle.load(f)
+        link = ml.Ringkas(source)
+        hasilpreprocessing= ml.preprocessing(link)
+        res = ml.mp.predict(hasilpreprocessing)
+        data = {"data": data}
+        return jsonify(data)
+    
+    # if request.method == "POST":
 
+    #     link = request.form["link"]
+    #     hasil = ml.testing()
+        # data = []
+        # data = {"data": data}
+        # return jsonify(data)
+
+    #     res = json.dumps(hasil)
+    #     return res
+
+    return render_template('testing.html')
