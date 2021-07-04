@@ -6,7 +6,7 @@ Copyright (c) 2019 - present AppSeed.us
 # Flask modules
 from app import app
 from app import server as ml
-from flask import render_template, json, request, jsonify
+from flask import Flask, redirect, url_for, render_template, json, request, jsonify
 from jinja2  import TemplateNotFound
 from pandas.tseries.offsets import DateOffset
 import pandas as pd
@@ -34,22 +34,29 @@ def index(path):
 
 
 
-@app.route('/testing.html', methods=['GET', 'POST'])
+@app.route('/testing', methods=['GET', 'POST'])
 def testing():
 
     if request.method == "POST":
-        data = []
+        # data = []
         
         link = request.form["link"]
         source = 'detik'
 
-        with open('C:/users/asus/desktop/Model','rb') as f:
-            mp = ml.pickle.load(f)
-        link = ml.Ringkas(source)
-        hasilpreprocessing= ml.preprocessing(link)
-        res = ml.mp.predict(hasilpreprocessing)
-        data = {"data": data}
-        return jsonify(data)
+        hasil = ml.testing()
+
+        # with open('C:/users/asus/desktop/Model','rb') as f:
+        #     mp = ml.pickle.load(f)
+        # link = ml.Ringkas(source)
+        # hasilpreprocessing= ml.preprocessing(link)
+        # res = ml.mp.predict(hasilpreprocessing)
+        # data = {"data": data}
+        # hasil_data = jsonify(data)
+        return render_template('testing.html', title=hasil)
+    
+    else:
+         return render_template('testing.html')
+
     
     # if request.method == "POST":
 
@@ -62,4 +69,4 @@ def testing():
     #     res = json.dumps(hasil)
     #     return res
 
-    return render_template('testing.html')
+   
