@@ -231,3 +231,7 @@ def testing():
     res = mp.predict(hasilpreprocessing)
     
     return link, res
+
+# link, res = testing()
+# print(link, res)
+

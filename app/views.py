@@ -13,10 +13,19 @@ import pandas as pd
 import numpy as np
 from pandas import DataFrame
 from werkzeug.utils import secure_filename
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.base import BaseEstimator
+
 import os
 import csv
 import math
+import pickle
 
+class MyCustomUnpickler(pickle.Unpickler):
+    def find_class(self, module, name):
+        if module == "__main__":
+            module = "ml"
+        return super().find_class(module, name)
 
 
 # App main route + generic routing
@@ -38,21 +47,22 @@ def index(path):
 def testing():
 
     if request.method == "POST":
-        # data = []
+        data = []
         
         link = request.form["link"]
         source = 'detik'
 
-        hasil = ml.testing()
+        with open('C:/users/asus/desktop/Model','rb') as f:
+            # mp = pickle.load(f)
+            unpickler = MyCustomUnpickler(f)
+            mp = unpickler.load()
 
-        # with open('C:/users/asus/desktop/Model','rb') as f:
-        #     mp = ml.pickle.load(f)
-        # link = ml.Ringkas(source)
-        # hasilpreprocessing= ml.preprocessing(link)
-        # res = ml.mp.predict(hasilpreprocessing)
-        # data = {"data": data}
-        # hasil_data = jsonify(data)
-        return render_template('testing.html', title=hasil)
+        link = ml.Ringkas(source)
+        hasilpreprocessing= ml.preprocessing(link)
+        res = mp.predict(hasilpreprocessing)
+        data = {"data": data}
+        hasil_data = jsonify(data)
+        return render_template('testing.html', hasil_data=hasil_data)
     
     else:
          return render_template('testing.html')
