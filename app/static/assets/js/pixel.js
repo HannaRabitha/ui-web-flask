@@ -124,11 +124,61 @@ d.addEventListener("DOMContentLoaded", function(event) {
 
 });
 
-
 $(document).ready(function () {
     $('#tableTraining').DataTable({
         "pagingType": "simple_numbers",
         "lengthMenu": [2, 5, 10, 25, 50 ],
+        "scrollY": 500,
+        "scrollCollapse": true,
+        "paging":false
         // "dom": '<"top"i>rt<"bottom"flp><"clear">'
     });
   });
+
+  setupDataReport();
+  function setupDataReport() {
+
+      $('#tbReport').DataTable({
+        "ajax": {
+          "url": '/hpReport',
+          "dataType": "json",
+          "dataSrc": "data",
+          "contentType": "application/json"
+        },
+        "columns": [{
+            "data": "index"
+          },
+          {
+            "data": "precision"
+          },
+          {
+            "data": "recall"
+          },
+          {
+            "data": "f1-score"
+          },
+          {
+            "data": "support"
+          }
+        ],
+    
+        "columnDefs": [{
+            "className": "text-left",
+            "targets": 0
+          },
+          {
+            "className": "text-center",
+            "targets": "_all"
+          },
+        ],
+        "paging":   false,
+        "ordering": false,
+        "info":     false,
+        "searching": false
+      });
+    }
+
+
+
+
+

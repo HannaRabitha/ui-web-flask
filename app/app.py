@@ -81,7 +81,7 @@ detik = {
 
 @app.route('/training', methods=['GET', 'POST'])
 def training():
-    print("dita")
+    
     if request.method == 'POST':
         doks = request.files['inputfile']
         # data = []
@@ -113,7 +113,7 @@ def testing():
 
         links = request.form["link"]
 
-        with open('C:/Users/Raimid/Downloads/Model', 'rb') as f:
+        with open('C:/Users/ROG STRIX/Desktop/Model', 'rb') as f:
             unpickler = MyCustomUnpickler(f)
             obj = unpickler.load()
 
@@ -122,7 +122,7 @@ def testing():
         res = obj.predict(hasilpreprocessing)
         data = {"hasil": res}
         # hasil_data = jsonify(data)
-        return render_template('testing.html', isi_berita=teks, hasil_klasifikasi=res)
+        return render_template('testing.html', isi_berita=teks, hasil_klasifikasi=res, link=links)
 
     else:
         return render_template('testing.html')
@@ -137,6 +137,24 @@ def testing():
 
     #     res = json.dumps(hasil)
     #     return res
+
+    
+
+@app.route("/hpReport", methods=["GET"])
+def tampilReport():
+    data = []
+
+    # ini mengambil file hasil prediksi
+    # jadi file hasil prediksi mu di eksport dulu ke csv
+    # tentukan nama filenya jangan yang berubah-ubah mis "hasilPrediksi" atau yang lain
+    # tapi kalau mau bikin yang dinamis jg Gaskeun
+    with open('static\assets\img\evaluation\report_combined.csv', encoding='utf-8') as csvfile:
+        data_csv = csv.DictReader(csvfile, delimiter=',')
+        for row in data_csv:
+            data.append(dict(row))
+    data = {"data": data}
+    return jsonify(data)
+
 
 
 if __name__ == '__main__':
