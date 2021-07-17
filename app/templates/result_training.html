@@ -1,0 +1,126 @@
+<!-- {% extends "layouts/base.html" %}
+     -->
+
+{% block title %} Training {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<main>
+
+    {% include 'includes/preloader.html' %}
+ 
+
+
+    <!--Section Preprocessing Result-->
+
+    <section class="section section-md">
+        <div class="container">
+            <div class="row align-items-center justify-content-around">
+                <section id="preprocessing">
+                    <div class="row justify-content-between align-items-center mb-5 mb-lg-7">
+                        <h1> Preprocessing Result </h1>
+                        <br>
+                        <br>
+
+                        <table id="tableTraining" data-show-pagination-switch="true"
+                        data-pagination="true" class="table table-success table-striped" cellspacing ="0" style="width: 100%;">
+                           
+
+                            {% if column_names is defined : %}<h5>Berita Asli
+                            </h5>
+                            {%endif%}
+
+                            <thead>
+                                <!-- <tr> -->
+                                {% for col in column_names %}
+                                <th>{{col}}</th>
+                                {% endfor %}
+                            </thead>
+                            <tbody>
+                                {% for row in row_data %}
+                                <tr>
+                                    {% for col, row_ in zip(column_names, row) %}
+                                    <td>{{row_}}</td>
+
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </section>
+
+            </div>
+        </div>
+  
+    </section>
+
+    <!--Section Preprocessing Result-->
+
+
+
+    <!-- Section IMAGE CONFUSION MATRIX -->
+    <!-- <section class="section section-md">
+        <div class="container">
+            <div class="row align-items-center justify-content-around">
+
+
+                <section id="confusion_matrix">
+                    <div class="row justify-content-between align-items-center mb-5 mb-lg-7"> -->
+
+                        <!-- <div class="col-12 col-lg-6 order-lg-1">
+                            <img src="/static/assets/img/confusion_matrix.png" alt="Front pages overview" width="100%">
+                        </div> -->
+
+                        <!-- <div class="col-12 col-lg-6 order-lg-1">
+                            <table id="tbReport" class="table" style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th> </th>
+                                        <th>precision</th>
+                                        <th>recall</th>
+                                        <th>f1-Score</th>
+                                        <th>support</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div> -->
+
+
+                        <!-- <div class="col-12 col-lg-6 order-lg-1">
+                                    <img src="/static/assets/img/table.png" alt="Front pages overview">
+                                </div> -->
+
+<!-- 
+                    </div>
+
+
+            
+                </section>
+
+            </div>
+        </div>
+    </section> -->
+
+    <!-- End of section -->
+
+    <section class="section section-md">
+        <div class="container">
+        <div class="row align-items-center justify-content-around">
+        <a href="{{url_for('training')}}" class="btn btn-tertiary"> TRAINING ULANG</a>
+        </div>
+        </div>
+    </section>
+
+
+    {% include 'includes/footer.html' %}
+    {% include 'includes/scripts.html' %}
+
+    {% endblock content %}
+
+    <!-- Specific Page JS goes HERE  -->
+    {% block javascripts %}{% endblock javascripts %}

@@ -123,3 +123,12 @@ d.addEventListener("DOMContentLoaded", function(event) {
     }
 
 });
+
+
+$(document).ready(function () {
+    $('#tableTraining').DataTable({
+        "pagingType": "simple_numbers",
+        "lengthMenu": [2, 5, 10, 25, 50 ],
+        // "dom": '<"top"i>rt<"bottom"flp><"clear">'
+    });
+  });

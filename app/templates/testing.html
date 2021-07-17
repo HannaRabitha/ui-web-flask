@@ -1,75 +1,88 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Testing {% endblock %} 
+{% block title %} Testing {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
 
-    <main>
-        
-        {% include 'includes/preloader.html' %}
+<main>
 
-        <!-- Hero -->
-        <section class="section-header bg-dark text-white">
-            <div class="container">
-               <div class="row justify-content-between align-items-center">
-                  <div class="col-12 col-md-7 col-lg-6 text-center text-md-left">
-                        <h1 class="display-2 mb-4">Testing<br class="d-none d-md-inline">Data</h1>
-                        
+  {% include 'includes/preloader.html' %}
+
+  <!-- Hero -->
+  <section class="section-header bg-dark text-white">
+    <div class="container">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-12 col-md-7 col-lg-6 text-center text-md-left">
+          <h1 class="display-2 mb-4">Testing<br class="d-none d-md-inline">Data</h1>
 
 
-                        <form id="formTrain" action="" enctype="multipart/form-data" method="POST">
-                        <div class="form-group">
-                            <!-- <label>Link Berita</label> -->
-                            <input type="link" class="form-control" id="link" name="link" placeholder="Enter link">
-                          </div>
-                          <br>
-                          <button type="submit" value="submit" class="btn btn-primary">Mulai Test</button>
-                        </form>
-                        </div> 
 
-                  <div class="col-12 col-md-5 d-none d-md-block text-center"><img src="/static/assets/img/illustrations/reading-side.svg" alt=""></div>
-               </div>
+          <form id="formTrain" action="" enctype="multipart/form-data" method="POST">
+            <div class="form-group">
+              <!-- <label>Link Berita</label> -->
+              <input type="link" class="form-control" id="link" name="link" placeholder="Enter link">
             </div>
-            <figure class="position-absolute bottom-0 left-0 w-100 d-none d-md-block mb-n2">
-               <svg class="fill-white" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 43.4" style="enable-background:new 0 0 1920 43.4;" xml:space="preserve">
-                  <path d="M0,23.3c0,0,405.1-43.5,697.6,0c316.5,1.5,108.9-2.6,480.4-14.1c0,0,139-12.2,458.7,14.3 c0,0,67.8,19.2,283.3-22.7v35.1H0V23.3z"></path>
-               </svg>
-            </figure>
-        </section>
+            <br>
+            <button type="submit" value="submit" class="btn btn-primary" href="#testing">Mulai Test</button>
+          </form>
+        </div>
 
-        <section class="section section-md">
-            <div class="container">
-                <div class="row justify-content-center text-center">
-                  
-                    <div class="col-12 ">
-                        <table id="testing" class="table" style="width: 100%;">
-                            <thead>
-                              <tr>
-                                <th> </th>
-                                <th width="60%"><h1> Isi Berita</h1></th>
-                                <th width="40%"><h1> Hasil Klasifikasi</h1></th>
-                              </tr>
-                              <tr>
-                                <th> </th>
-                                <th class="text-justify">{{ hasil_data }}</th>
-                                <th class="text-center">{{ hasil_data }}</th>
-                                </div>
-                               
-                              </tr>
-                            </thead>
-                          </table>    
-                    </div>
+        <div class="col-12 col-md-5 d-none d-md-block text-center"><img
+            src="/static/assets/img/illustrations/reading-side.svg" alt=""></div>
+      </div>
+    </div>
+    <figure class="position-absolute bottom-0 left-0 w-100 d-none d-md-block mb-n2">
+      <svg class="fill-white" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 43.4"
+        style="enable-background:new 0 0 1920 43.4;" xml:space="preserve">
+        <path
+          d="M0,23.3c0,0,405.1-43.5,697.6,0c316.5,1.5,108.9-2.6,480.4-14.1c0,0,139-12.2,458.7,14.3 c0,0,67.8,19.2,283.3-22.7v35.1H0V23.3z">
+        </path>
+      </svg>
+    </figure>
+  </section>
 
-                </div>
-            </div>
-        </section>
+  <section id="testing" class="section section-md">
+    <div class="container">
+      <div class="row justify-content-center text-center">
 
-    </main>
+        <div class="col-12 ">
+          <table id="testing" class="table" style="width: 100%;">
+            <thead>
+              <tr>
+                <th> </th>
+                <th width="60%">
+                  <h1> Isi Berita</h1>
+                </th>
+                <th width="40%">
+                  <h1> Hasil Klasifikasi</h1>
+                </th>
+              </tr>
+              <tr>
+                <th class="text-justify">
+                  {{isi_berita}}
+                </th>
+                <th class="text-center">
+                  {%for kelas in hasil_klasifikasi%}
+                  {{kelas}}
+                  {%endfor%}</th>
+              </tr>
+        </div>
+        </tr>
+        </thead>
+        </table>
+      </div>
 
-    {% include 'includes/footer.html' %}
+    </div>
+    </div>
+  </section>
+
+</main>
+
+{% include 'includes/footer.html' %}
 
 {% endblock content %}
 

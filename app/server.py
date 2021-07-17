@@ -70,9 +70,11 @@ def traning(data):
     
     return akurasi
 
+
 def model(data):
     df = pd.read_csv(data, encoding = 'ISO-8859-1')
-    df_x = df['kasus']
+    df_x = df['Hasil Preprocessing']
+    # df_z = df['kasus_x']
     df_y = df['label']
     
     tfidf_transformer = Text2TfIdfTransformer()
@@ -83,10 +85,10 @@ def model(data):
 
     #model xgboost
     xgbst=pl_xgb_tf_idf.fit(df_x, df_y) 
-    with open('/content/drive/MyDrive/Model','wb') as f:
+    with open('C:/Users/ROG STRIX/Desktop/Model','wb') as f:
         pickle.dump(xgbst,f)
     
-    return model
+    return xgbst, df
 
 def testing(data):
     df = pd.read_csv(data, encoding = 'ISO-8859-1')
@@ -104,7 +106,7 @@ def testing(data):
     ax = sns.heatmap(cf_matrix, annot=True, xticklabels = labels, yticklabels=labels, cmap="YlGnBu")
     plt.xlabel('prediction')
     plt.ylabel('actual')
-    plt.show()
+    #plt.show()
     return hasil
 
 def prepro(data):
@@ -199,32 +201,17 @@ def Paging_Number(source, url):
   max_paging = soup.find('div', class_=source["paging"])
   return int(max_paging[-1])+1
   
-def Ringkas(source):
-  URL = input()
+def Ringkas(source, url):
+    URL = url
 
-  if source!="tribun":
     text = Scrap_News(source, URL)
     sum = text
 
-  else:
-    num_page = Paging_Number(source,URL)
-    res_ = []
-    
-    for i in range(1, num_page):
-      url = url + "?page=" + str(i)
-      res = Scrap_News(source, url)
-      res_.append(res)
-
-    text = " ".join(res_)
-
-    for i in source["noise"]:
-      text = text.replace(i, " ")
-
-  return text
+    return text
 
 
 def testing():
-    with open('C:/users/asus/desktop/Model','rb') as f:
+    with open('C:/Users/Raimid/Downloads/Model','rb') as f:
         mp = pickle.load(f)
     link = Ringkas(detik)
     hasilpreprocessing= preprocessing(link)
