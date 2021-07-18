@@ -6,7 +6,7 @@ Copyright (c) 2019 - present AppSeed.us
 # Flask modules
 # from app import app
 # import app.server as server
-from server import Text2TfIdfTransformer, Ringkas, preprocessing, model
+from server import Text2TfIdfTransformer, Ringkas, preprocessing, model, testing
 from flask import Flask, redirect, url_for, render_template, json, request, jsonify
 from jinja2 import TemplateNotFound
 from pandas.tseries.offsets import DateOffset
@@ -140,6 +140,8 @@ def testing():
 
 @app.route("/hpReport", methods=["GET"])
 def tampilReport():
+
+    
     data = []
 
     # ini mengambil file hasil prediksi
