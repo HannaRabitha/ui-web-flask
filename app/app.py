@@ -31,7 +31,7 @@ app = Flask(__name__)
 app.config['TESTING'] = True
 app.config['SECRET_KEY'] = 'S#perS3crEt_JamesBond'
 
-
+DATASET_LOC = 'app/static/file/'
 ALLOWED_EXTENSIONS = {'csv'}
 
 
@@ -111,6 +111,8 @@ def testing():
     if request.method == "POST":
         links = request.form["link"]
 
+        src = '/static/assets/img/evaluation/HeatMap-fix.png'
+
         with open('C:/Users/ROG STRIX/Desktop/Model', 'rb') as f:
             unpickler = MyCustomUnpickler(f)
             obj = unpickler.load()
@@ -120,7 +122,7 @@ def testing():
         res = obj.predict(hasilpreprocessing)
         data = {"hasil": res}
         # hasil_data = jsonify(data)
-        return render_template('testing.html', isi_berita=teks, hasil_klasifikasi=res, link=links)
+        return render_template('testing.html', isi_berita=teks, hasil_klasifikasi=res, link=links, src=src)
 
     else:
         return render_template('testing.html')
@@ -141,14 +143,14 @@ def testing():
 @app.route("/hpReport", methods=["GET"])
 def tampilReport():
 
-    
+
     data = []
 
     # ini mengambil file hasil prediksi
     # jadi file hasil prediksi mu di eksport dulu ke csv
     # tentukan nama filenya jangan yang berubah-ubah mis "hasilPrediksi" atau yang lain
     # tapi kalau mau bikin yang dinamis jg Gaskeun
-    with open('static\assets\img\evaluation\report_combined.csv', encoding='utf-8') as csvfile:
+    with open('/static/assets/img/evaluation/report_combined.csv', encoding='utf-8') as csvfile:
         data_csv = csv.DictReader(csvfile, delimiter=',')
         for row in data_csv:
             data.append(dict(row))
