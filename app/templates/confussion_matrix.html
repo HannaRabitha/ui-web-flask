@@ -18,42 +18,33 @@
     <section class="section section-md">
         <div class="container">
             <div class="row align-items-center justify-content-around">
-                <section id="preprocessing">
-                    <div class="row justify-content-between align-items-center mb-5 mb-lg-7">
-                        <h1> Preprocessing Result </h1>
-                        <br>
-                        <br>
+              
+  <section id="confussion_matrix" class="section section-md">
+    <a href="{{url_for('hpreport')}}" class="btn btn-primary"> CONFUSSION MATRIX</a>
 
-                        <table id="tableTraining" data-show-pagination-switch="true"
-                        data-pagination="true" class="table table-success table-striped" cellspacing ="0" style="width: 100%;">
-                           
+              <div class="sub-judul">Evaluasi - Confussion Matrix</div>     
+              <div class="row">
+                <div class="col-md-5">
+                  
+                  <img src="" alt="grafik-loss" id="hm" width="100%">
+                </div>
+                <div class="col-md-7">
+                  <table id="tbReport" class="table" style="width: 100%;">
+                    <thead>
+                      <tr>
+                        <th> </th>
+                        <th>precision</th>
+                        <th>recall</th>
+                        <th>f1-Score</th>
+                        <th>support</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+  </section>
 
-                            {% if column_names is defined : %}<h5>Berita Asli
-                            </h5>
-                            {%endif%}
-
-                            <thead>
-                                <!-- <tr> -->
-                                {% for col in column_names %}
-                                <th>{{col}}</th>
-                                {% endfor %}
-                            </thead>
-                            <tbody>
-                                {% for row in row_data %}
-                                <tr>
-                                    {% for col, row_ in zip(column_names, row) %}
-                                    <td>{{row_}}</td>
-
-                                    {% endfor %}
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-
-                    </div>
-                </section>
-
-                <a href="{{url_for('training')}}" class="btn btn-primary"> TRAINING ULANG</a>
+            
             </div>
         </div>
   

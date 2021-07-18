@@ -109,8 +109,6 @@ def training():
 def testing():
 
     if request.method == "POST":
-        # data = []
-
         links = request.form["link"]
 
         with open('C:/Users/ROG STRIX/Desktop/Model', 'rb') as f:
