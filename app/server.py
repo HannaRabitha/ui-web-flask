@@ -93,7 +93,7 @@ def testing(data):
     df = pd.read_csv(data, encoding='ISO-8859-1')
     df_x = df['kasus']
     df_y = df['label']
-    with open('/content/drive/MyDrive/Model', 'rb') as f:
+    with open('C:/Users/ROG STRIX/Desktop/Model', 'rb') as f:
         mp = pickle.load(f)
     res = mp.predict(df_x)
 
