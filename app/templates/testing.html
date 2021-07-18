@@ -20,7 +20,7 @@
 
 
 
-          <form id="formTrain" action="" enctype="multipart/form-data" method="POST">
+          <form id="formTest" action="" enctype="multipart/form-data" method="POST">
             <div class="form-group">
               <!-- <label>Link Berita</label> -->
               <input type="link" class="form-control" id="link" name="link" placeholder="Enter link" value="{{link}}">
@@ -67,7 +67,7 @@
                 </th>
                 <th class="text-center">
                   {%for kelas in hasil_klasifikasi%}
-                  {{kelas}}
+                  <h2>{{kelas}} </h2>
                   {%endfor%}</th>
               </tr>
         </div>
@@ -91,7 +91,7 @@
               <div class="row">
                 <div class="col-md-5">
                   
-                  <img src="{{src}}" alt="grafik" id="hm" width="100%">
+                  <img src="/static/assets/img/evaluation/HeatMap-fix.png" alt="grafik" id="hm" width="100%">
                 </div>
                 <div class="col-md-7">
                   <table id="tbReport" class="table" style="width: 100%;">
@@ -103,6 +103,60 @@
                         <th>f1-Score</th>
                         <th>support</th>
                       </tr>
+                      
+                      <tr>
+                        <td>Ancaman</td>
+                        <td>1.00</td>
+                        <td>1.00</td>
+                        <td>1.00</td>
+                        <td>16</td>
+                      </tr>
+                      <tr>
+                        <td>Carding</td>
+                        <td>1.00</td>
+                        <td>0.94</td>
+                        <td>0.97</td>
+                        <td>17</td>
+                      </tr>
+                      <tr>
+                        <td>Hoax</td>
+                        <td>0.94</td>
+                        <td>0.94</td>
+                        <td>0.94</td>
+                        <td>16</td>
+                      </tr>
+                      <tr>
+                        <td>Peretasan</td>
+                        <td>1.00</td>
+                        <td>0.89</td>
+                        <td>0.94</td>
+                        <td>18</td>
+                      </tr>
+
+                      <tr>
+                        <td>accuracy</td>
+                        <td> </td>
+                        <td> </td>
+                        <td>0.95</td>
+                        <td>80</td>
+                      </tr>
+
+                      <tr>
+                        <td>macro avg</td>
+                        <td>0.95</td>
+                        <td>0.95</td>
+                        <td>0.95</td>
+                        <td>80</td>
+                      </tr>
+
+                      <tr>
+                        <td>weighted avg</td>
+                        <td>0.96</td>
+                        <td>0.95</td>
+                        <td>0.95</td>
+                        <td>80</td>
+                      </tr>
+
                     </thead>
                   </table>
                 </div>

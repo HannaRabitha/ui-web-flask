@@ -135,7 +135,27 @@ $(document).ready(function () {
     });
   });
 
-  setupDataReport();
+  var formTest = ID("formTest");
+
+  $(formTest).submit(function (e) {
+    e.preventDefault();
+  
+    var formData = new FormData(this);
+    // eslint-disable-next-line no-undef
+    var xhr = $.ajax({
+      url: "/testing",
+      type: "POST",
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: formData,
+      success: function (data) {
+        setupDataReport();
+      },
+    });      
+  });
+  
+  // setupDataReport();
   function setupDataReport() {
 
       $('#tbReport').DataTable({

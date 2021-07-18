@@ -1,1 +1,9 @@
-""
+index,precision,recall,f1-score,support
+Bukan kasus,0.81,1.00,0.90,13
+ancaman,1.00,1.00,1.00,16
+carding,1.00,0.94,0.97,17
+hoax,0.94,0.94,0.94,16
+peretasan,1.00,0.89,0.94,18
+accuracy, , ,0.95,80
+macro avg,0.95,0.95,0.95,80
+weighted avg,0.96,0.95,0.95,80 

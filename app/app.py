@@ -111,7 +111,22 @@ def testing():
     if request.method == "POST":
         links = request.form["link"]
 
-        src = '/static/assets/img/evaluation/HeatMap-fix.png'
+    #     src = '/static/assets/img/evaluation/HeatMap-fix.png'
+        
+    #     data = [
+    #     [
+    #         'Bukan kasus', 
+    #         [0.81,      1.00,      0.90,        13]
+    #      ], 
+    #     [
+    #         'ancaman', 
+    #         [1.00, 1.00,      1.00,        16]
+    #         ],
+    #     [
+    #         'carding', 
+    #         [1.00,    0.94,     0.97,        17]
+    #      ]
+    # ]
 
         with open('C:/Users/ROG STRIX/Desktop/Model', 'rb') as f:
             unpickler = MyCustomUnpickler(f)
@@ -121,8 +136,9 @@ def testing():
         hasilpreprocessing = preprocessing(teks)
         res = obj.predict(hasilpreprocessing)
         data = {"hasil": res}
+     
         # hasil_data = jsonify(data)
-        return render_template('testing.html', isi_berita=teks, hasil_klasifikasi=res, link=links, src=src)
+        return render_template('testing.html', isi_berita=teks, hasil_klasifikasi=res, link=links)
 
     else:
         return render_template('testing.html')
@@ -145,15 +161,15 @@ def tampilReport():
 
 
     data = []
-
+ 
     # ini mengambil file hasil prediksi
     # jadi file hasil prediksi mu di eksport dulu ke csv
     # tentukan nama filenya jangan yang berubah-ubah mis "hasilPrediksi" atau yang lain
     # tapi kalau mau bikin yang dinamis jg Gaskeun
-    with open('/static/assets/img/evaluation/report_combined.csv', encoding='utf-8') as csvfile:
+    with open('static/assets/img/evaluation/report_combined.csv', encoding='utf-8') as csvfile:
         data_csv = csv.DictReader(csvfile, delimiter=',')
         for row in data_csv:
-            data.append(dict(row))
+            data.append(dict(row))  
     data = {"data": data}
     return jsonify(data)
 
